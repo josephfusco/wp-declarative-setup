@@ -11,8 +11,8 @@
     "wp-coding-standards/wpcs": "^2.3"
   },
   "scripts": {
-    "start": "docker-compose up -d",
-    "stop": "docker-compose down",
+    "start": "docker compose up -d",
+    "stop": "docker compose down",
     "setup": [
       "composer install",
       "sh bin/apply_blueprint.sh"
@@ -21,6 +21,9 @@
     "apply-config": "sh bin/apply_blueprint.sh"
   },
   "config": {
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
