@@ -1,25 +1,30 @@
-
 services:
-  wordpress:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: wp_declarative_wordpress
-    env_file:
-      - .env
-    ports:
-      - "8000:80"
-    depends_on:
-      - db
-    networks:
-      - wp_network
-
   db:
-    image: mariadb:10.5
+    image: mysql/mysql-server:5.7
     container_name: wp_declarative_db
     environment:
       MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_network
+
+  wordpress:
+    image: wordpress:6.0-php8.0-apache
+    container_name: wp_declarative_wordpress
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./wordpress.config.json:/var/www/html/wordpress.config.json # Config file for blueprint
+      - ./bin/apply_blueprint.sh:/usr/local/bin/apply_blueprint.sh  # Setup script
+    depends_on:
+      - db
     networks:
       - wp_network
 
@@ -28,3 +33,4 @@ volumes:
 
 networks:
   wp_network:
+    driver: bridge
