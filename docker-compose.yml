@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wp_declarative_wordpress
+    env_file:
+      - .env
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    networks:
+      - wp_network
+
+  db:
+    image: mysql:5.7
+    container_name: wp_declarative_db
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - wp_network
+
+volumes:
+  db_data:
+
+networks:
+  wp_network:

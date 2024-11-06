@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "meta": {
+    "title": "Production WordPress Setup",
+    "author": "josephfusco",
+    "categories": ["production", "vip-compliant", "declarative"]
+  },
+  "preferredVersions": {
+    "php": "8.0",
+    "wp": "6.0"
+  },
+  "plugins": [
+    {"slug": "wp-graphql"},
+    {"slug": "wp-graphql-jwt-authentication"},
+    {"slug": "advanced-custom-fields"},
+    {"slug": "faustwp"},
+    {"slug": "wordpress-seo"}
+  ],
+  "themes": [
+    {"slug": "twentytwentytwo"}
+  ],
+  "constants": {
+    "WP_DEBUG": false,
+    "JWT_AUTH_SECRET_KEY": "secure-production-key",
+    "JWT_AUTH_CORS_ENABLE": true
+  },
+  "siteOptions": {
+    "blogname": "Production WordPress Site",
+    "blogdescription": "Production-ready environment for WordPress",
+    "timezone_string": "America/New_York",
+    "permalink_structure": "/%postname%/"
+  },
+  "login": {
+    "username": "admin",
+    "password": "securepassword"
+  },
+  "steps": [
+    {
+      "step": "activatePlugin",
+      "pluginPath": "wp-graphql/wp-graphql.php"
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "advanced-custom-fields/acf.php"
+    },
+    {
+      "step": "defineSiteUrl",
+      "siteUrl": "http://localhost:8000"
+    }
+  ]
+}

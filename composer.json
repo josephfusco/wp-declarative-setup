@@ -1,0 +1,26 @@
+{
+  "name": "josephfusco/wp-declarative-setup",
+  "description": "A production-ready WordPress setup with declarative configuration",
+  "type": "project",
+  "require": {
+    "php": ">=8.0",
+    "wp-cli/wp-cli": "^2.5",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^2.3"
+  },
+  "scripts": {
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "setup": [
+      "composer install",
+      "sh bin/apply_blueprint.sh"
+    ],
+    "lint": "phpcs --standard=WordPress .",
+    "apply-config": "sh bin/apply_blueprint.sh"
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}

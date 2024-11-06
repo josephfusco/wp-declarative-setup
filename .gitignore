@@ -1,0 +1,34 @@
+# Ignore environment files
+.env
+
+# Ignore WordPress core files and uploads if they’re managed outside of version control
+wp-content/uploads/
+wp-config.php
+
+# Ignore Composer dependencies
+/vendor/
+/composer.lock
+
+# Ignore Docker and build files
+docker-compose.override.yml
+db_data/
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore PHPStorm and VS Code project files
+.idea/
+.vscode/
+
+# Ignore Node modules if used in the project
+node_modules/
+
+# Ignore PHP CodeSniffer cache
+.phpcs.cache
+
+# Ignore other temporary files
+*.bak
+*.swp
+*~
